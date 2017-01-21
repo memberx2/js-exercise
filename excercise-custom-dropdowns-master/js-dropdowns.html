@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Custom Dropdown Excercise</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex" />
+        <style>
+            .row {
+                display: flex;
+            }
+            .row .col {
+                padding-right: 10%;
+            }
+            .row .col div {
+                position: relative;
+            }
+            
+            button {
+                border: 0;         
+                width: 279px;
+                height: 42px;
+                font-size: 12px;
+                padding-left: 15px;
+                background: url(down-arrow.png) no-repeat right #f3f3f4;
+                background-position-x: 245px;
+                outline: none;
+                text-align: left;
+                cursor: pointer;
+            }
+
+            .opened button {
+                background: url(up-arrow.png) no-repeat right #f3f3f4;
+                background-position-x: 245px;
+            }
+
+            .js-custom-dropdown select {
+                display: none;
+            }
+
+            ul {
+                position: absolute;
+                list-style: none;
+                top: 42px;
+                margin: 0;
+                padding: 0;
+                font-family: Arial;
+                font-size: 12px;
+                font-weight: bold;
+                text-transform: uppercase;
+                display: none;
+            }
+
+            .opened ul {
+                display: block;
+            }
+
+            li {
+                background-color: #f9f9f9;
+                padding: 16px 0 16px 15px;
+                width: 264px
+
+            }
+
+            li:hover {
+                background-color: #ff7bcc;
+                color: #fff;
+                cursor: pointer;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col">
+                <h2>Original Dropdown</h2>
+                <select class="">
+                    <option disabled>Please select something</option>
+                    <option value="1">All</option>
+                    <option value="2">Internal</option>
+                    <option value="3">External</option>
+                </select>
+            </div>
+            <div class="col">
+                <h2>Custom Dropdown</h2>
+                <select class="js-custom-dropdown">
+                    <option disabled>Please select something</option>
+                    <option value="1">All</option>
+                    <option value="2" selected>Internal</option>
+                    <option value="3">External</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="console">
+                <h3 class="console__name">Console</h3>
+                <p class="console__content">
+
+                </p>
+            </div>
+        </div>
+        <script>
+            // start: do not modify
+            const dropdowns = document.querySelectorAll('select')
+            const logger = document.querySelectorAll('.console__content')[0]
+
+            dropdowns.forEach((dropdown, index) => {
+                dropdown.addEventListener('change', () => {
+                    logger.innerHTML = `Dropdown <strong>${index + 1}</strong> has been changed to: <strong>${dropdown.value}</strong>.`
+                })
+            })
+            // end: do not modify
+        </script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="./plugin.js"></script>
+    </body>
+</html>
