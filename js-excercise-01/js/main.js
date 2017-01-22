@@ -1,20 +1,27 @@
 $(document).ready(function () {
 
-  	$("ul.portfolio__lcolumn__category > .tag").click(function (e) {
-    	var tag = "#" + $(this).text().toLowerCase().replace(" ", "-");
-		$(".portfolio__rcolumn__box li").hide();
-		$(".portfolio__rcolumn__box li:contains(" + tag + ")").show();
-   		e.preventDefault();
-  	});
+    var tags = $(".js-filter-category").find("a");
+    var tagsItem = $(".js-filter-tag");
 
-  	$("#all").click(function (e) {
-		$(".portfolio__rcolumn__box li").show();
-   		e.preventDefault();
-  	});
+    tags.on("click", function (e) {
+        var tag = $(this).text();
 
-  	$("ul.portfolio__lcolumn__category > li > a").click(function (e) {
-    	$(".active", $(this).closest("ul")).removeClass("active");
-    	$(this).addClass("active");  	
-   		e.preventDefault();
-  });
+        
+        if (!$(this).hasClass("active")) {
+            tags.removeClass("active");
+            $(this).addClass("active");
+        }
+
+        tag = "#" + tag.replace(" ", "-").toLowerCase();
+        tagsItem.hide();
+
+        if (tag == "#all") {
+            tagsItem.show();
+        } else {
+            tagsItem.filter(":contains(" + tag + ")").show();
+        }
+
+        e.preventDefault();
+
+    });
 });

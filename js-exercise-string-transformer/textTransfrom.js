@@ -12,4 +12,4 @@ function stringTransformer (input) {
 
 }
 
-console.log(stringTransformer("Example Input TomaSZEk"));
+console.log(stringTransformer("Example Input"));

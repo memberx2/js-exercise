@@ -29,25 +29,28 @@ $(document).ready(function () {
 		select.before(container);
 		container.append(select);
 
-		$(".button", container).click(function () {
+		container.find(".button").on("click", function () {
 			container.toggleClass("opened");
 		});
 
-		$("li", container).click(function(e) {
-			
+		container.find("li").on("click", function(e) {
+
 			if (select.val() != $(this).attr("value")){
-				$(".button", container).text($(e.target).text());
+				container.find(".button").text($(e.target).text());
 				select.val($(this).attr("value"));
 				select[0].dispatchEvent(new Event('change'));
 			}
+
 			container.removeClass("opened");
 		});	
 	});
 	
 	$(window).click(function(e) {
+
 		if (!$(e.target).parents(".js-custom-dropdown").length) {
 	    	container.removeClass("opened");
 	    }
+	    
 	});
 
 })
