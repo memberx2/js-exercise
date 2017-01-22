@@ -17,7 +17,7 @@
                 position: relative;
             }
             
-            button {
+            .button {
                 border: 0;         
                 width: 279px;
                 height: 42px;
@@ -30,12 +30,12 @@
                 cursor: pointer;
             }
 
-            .opened button {
+            .opened .button {
                 background: url(up-arrow.png) no-repeat right #f3f3f4;
                 background-position-x: 245px;
             }
 
-            .js-custom-dropdown select {
+            select.js-custom-dropdown  {
                 display: none;
             }
 
@@ -76,7 +76,7 @@
             <div class="col">
                 <h2>Original Dropdown</h2>
                 <select class="">
-                    <option disabled>Please select something</option>
+                    <option disabled selected>Please select something</option>
                     <option value="1">All</option>
                     <option value="2">Internal</option>
                     <option value="3">External</option>
@@ -113,6 +113,6 @@
             // end: do not modify
         </script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="./plugin.js"></script>
+        <script src="./plugin.js"></script>
     </body>
 </html>

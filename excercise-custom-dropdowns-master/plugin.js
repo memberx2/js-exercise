@@ -1,60 +1,53 @@
 $(document).ready(function () {
-    $("select.js-custom-dropdown").each(function() {
-        var options = $("<ul/>");
-        var select = $(this);
-        var container = $("<div/>", {
-            class: "js-custom-dropdown"
-        });
+	$("select.js-custom-dropdown").each(function() {
+		var options = $("<ul/>");
+		var container = $("<div/>" , {
+			class: "container js-custom-dropdown"
+		});
+		var select = $(this);
 
-        var defaultOption = $("option[disabled]", select);
-        var selected = $("option[selected]", select);
+		var selectedOption = select.find("option[selected]");
+		var disabledOption = select.find("option[disabled]");
 
-        var defaultText = selected.length > 0 ? selected.text() : defaultOption.text();
-        var defaultValue = selected.length > 0 ? selected.attr("value") : defaultOption.attr("value")
+		container.append($("<button/>", {
+			class: "button",
+			text: selectedOption.length ? selectedOption.text() : disabledOption.text()
+		}));
 
-        defaultOption.remove();
+		disabledOption.remove();
+	
+		select.find("option").each(function () {
+			var option = $(this);
+			options.append($("<li/>" ,{
+				text: option.text(),
+				value: option.val()
+			}));
+		});
 
-        var button = $("<button/>", {
-            text: defaultText
-        }).click(function() {
-            $(this).closest(".js-custom-dropdown").toggleClass("opened");
-        });
+		container.append(options);
+		
+		select.before(container);
+		container.append(select);
 
-        container.append(button);
+		$(".button", container).click(function () {
+			container.toggleClass("opened");
+		});
 
-        $("option", select).each(function(){ 
-            var option = $(this);
+		$("li", container).click(function(e) {
+			
+			if (select.val() != $(this).attr("value")){
+				$(".button", container).text($(e.target).text());
+				select.val($(this).attr("value"));
+				select[0].dispatchEvent(new Event('change'));
+			}
+			container.removeClass("opened");
+		});	
+	});
+	
+	$(window).click(function(e) {
+		if (!$(e.target).parents(".js-custom-dropdown").length) {
+	    	container.removeClass("opened");
+	    }
+	});
 
-            var li = $("<li/>",{ 
-                text: option.text(),
-                value: option.attr("value"),
-            }).click(function() {
-                var selectedLi = $(this);
-                var dropdownContainer = selectedLi.closest(".js-custom-dropdown");
-                var dropdownButton = dropdownContainer.find("button");
-                var dropdown = dropdownContainer.find("select");
-
-                if (selectedLi.attr("value") != dropdown.val()) {
-
-                    dropdownButton.text(selectedLi.text());
-                    dropdown.val(selectedLi.attr("value"));
-
-                    dropdown.get(0).dispatchEvent(new Event("change"));
-                }
-
-                dropdownContainer.toggleClass("opened");
-            });
-
-            options.append(li);
-        });
-
-        container.append(options);
-        select.after(container);
-        container.append(select);
-    });
-
-    $(document).click(function(e) {
-        if($(e.target).closest(".js-custom-dropdown").length < 1)
-            $(".js-custom-dropdown").removeClass("opened");
-    });
-});
+})
