@@ -1,24 +1,24 @@
 $(document).ready(function () {
 
-    var tags = $(".js-filter-category").find("a");
-    var tagsItem = $(".js-filter-tag");
+    var $tags = $('.js-filter-category').find('a');
+    var $tagsItem = $(".js-filter-tag");
 
-    tags.on("click", function (e) {
-        var tag = $(this).text();
+    $tags.on('click', function (e) {
+        var $tagName = $(this).text();
 
         
-        if (!$(this).hasClass("active")) {
-            tags.removeClass("active");
-            $(this).addClass("active");
+        if (!$(this).hasClass('active')) {
+            $tags.removeClass('active');
+            $(this).addClass('active');
         }
 
-        tag = "#" + tag.replace(" ", "-").toLowerCase();
-        tagsItem.hide();
+        $tagName = '#' + $tagName.replace(' ', '-').toLowerCase();
+        $tagsItem.hide();
 
-        if (tag == "#all") {
-            tagsItem.show();
+        if ($tagName == '#all') {
+            $tagsItem.show();
         } else {
-            tagsItem.filter(":contains(" + tag + ")").show();
+            $tagsItem.filter(':contains(' + $tagName + ')').show();
         }
 
         e.preventDefault();
